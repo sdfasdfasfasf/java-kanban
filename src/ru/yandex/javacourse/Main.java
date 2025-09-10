@@ -1,3 +1,11 @@
+package ru.yandex.javacourse;
+
+import ru.yandex.javacourse.manager.TaskManager;
+import ru.yandex.javacourse.tasks.Epic;
+import ru.yandex.javacourse.tasks.Subtask;
+import ru.yandex.javacourse.tasks.Task;
+import ru.yandex.javacourse.tasks.TaskStatus;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -24,10 +32,16 @@ public class Main {
         Subtask subtask2 = new Subtask("subtask2", "subtask2Description2");
 
         Epic epic1 = new Epic("epic1", "epic1Description1");
-        epic1.addSubtask(subtask1);
-        epic1.addSubtask(subtask2);
-
         taskManager.addEpic(epic1);
+
+        subtask1.setEpicId(epic1.getId());
+        taskManager.addSubtask(subtask1);
+
+        subtask2.setEpicId(epic1.getId());
+        taskManager.addSubtask(subtask2);
+
+        Epic epic2 = new Epic("epic2", "epic1Description2");
+        taskManager.addEpic(epic2);
 
         System.out.println("Списки эпиков:");
         System.out.println(taskManager.getEpics());
@@ -35,16 +49,15 @@ public class Main {
 
         epic1.setName("newEpic1");
         epic1.setDescription("newDescriptionEpic1");
-        epic1.setStatus(TaskStatus.IN_PROGRESS);
 
         taskManager.updateEpic(epic1);
 
-        System.out.println("Списки эпиков после обновления:");
+        System.out.println("Списки эпиков после обновления данных эпиков:");
         System.out.println(taskManager.getEpics());
         System.out.println();
 
         subtask2.setStatus(TaskStatus.IN_PROGRESS);
-        taskManager.getEpicById(epic1.getId()).updateSubtask(subtask2);
+        taskManager.updateSubtask(subtask2);
 
         System.out.println("Списки эпиков после изменения статуса подзадачи 2 IN_PROGRESS:");
         System.out.println(taskManager.getEpics());
@@ -52,8 +65,8 @@ public class Main {
 
         subtask1.setStatus(TaskStatus.DONE);
         subtask2.setStatus(TaskStatus.DONE);
-        taskManager.getEpicById(epic1.getId()).updateSubtask(subtask1);
-        taskManager.getEpicById(epic1.getId()).updateSubtask(subtask2);
+        taskManager.updateSubtask(subtask1);
+        taskManager.updateSubtask(subtask2);
 
         System.out.println("Списки эпиков после изменения статуса двух подзадач DONE:");
         System.out.println(taskManager.getEpics());

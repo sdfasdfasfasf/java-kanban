@@ -1,3 +1,5 @@
+package ru.yandex.javacourse.tasks;
+
 import java.util.Objects;
 
 public class Task {
@@ -11,7 +13,7 @@ public class Task {
     private String description;
 
     // Уникальный идентификационный номер задачи
-    private Integer id;
+    private final Integer id;
 
     // Статус
     private TaskStatus status;
@@ -54,7 +56,7 @@ public class Task {
 
     @Override
     public String toString(){
-        String result = "Task{" +
+        String result = "ru.yandex.javacourse.tasks.Task{" +
                 "id=" + id +
                 ", name=" + name +
                 ", description=" + description +
