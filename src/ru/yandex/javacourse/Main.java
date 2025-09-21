@@ -1,5 +1,6 @@
 package ru.yandex.javacourse;
 
+import ru.yandex.javacourse.manager.Managers;
 import ru.yandex.javacourse.manager.TaskManager;
 import ru.yandex.javacourse.tasks.Epic;
 import ru.yandex.javacourse.tasks.Subtask;
@@ -9,14 +10,20 @@ import ru.yandex.javacourse.tasks.TaskStatus;
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
+        TaskManager taskManager = new Managers().getDefault();
 
         // Tests:
+        System.out.println("История просмотров задач 1:");
+        System.out.println(Managers.getDefaultHistory().getHistory());
+        System.out.println();
+
         Task task1 = new Task("task1", "task1Description1");
         Task task2 = new Task("task2", "task2Description2");
 
         taskManager.addTask(task1);
         taskManager.addTask(task2);
+        taskManager.getTaskById(task1.getId());
+        taskManager.getTaskById(task2.getId());
 
         System.out.println("Списки задач:");
         System.out.println(taskManager.getTasks());
@@ -85,6 +92,10 @@ public class Main {
         System.out.println(taskManager.getSubtasksByEpicId(epic1.getId()));
         System.out.println();
 
+        System.out.println("История просмотров задач 2:");
+        System.out.println(Managers.getDefaultHistory().getHistory());
+        System.out.println();
+
         System.out.println("Списки эпиков после удаления одного эпика:");
         taskManager.removeEpic(epic1.getId());
         System.out.println(taskManager.getEpics());
@@ -102,6 +113,10 @@ public class Main {
         taskManager.clearEpics();
         System.out.println("Списки эпиков после удаления всех эпиков:");
         System.out.println(taskManager.getEpics());
+        System.out.println();
+
+        System.out.println("История просмотров задач 3:");
+        System.out.println(Managers.getDefaultHistory().getHistory());
         System.out.println();
     }
 }

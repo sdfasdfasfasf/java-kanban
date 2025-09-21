@@ -13,7 +13,7 @@ public class Task {
     private String description;
 
     // Уникальный идентификационный номер задачи
-    private final Integer id;
+    private Integer id;
 
     // Статус
     private TaskStatus status;
@@ -24,6 +24,10 @@ public class Task {
         this.name = name;
         this.description = description;
         this.status = TaskStatus.NEW;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
